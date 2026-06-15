@@ -23,79 +23,79 @@ const forces = [
 
 const actors = [
   { 
-    name: "EUA (Governo Federal)", 
+    name: "EUA (Governo)", 
     role: "Regulador Agressivo", 
-    action: "Reescrita sistêmica de regras: taxação de fundos patrimoniais, fim do DEI, portal de financiamento estrangeiro e pressão sobre acreditadoras.", 
-    insight: "A tática governamental migrou de 'ataques pontuais' para uma reestruturação arquitetônica do setor em 2026. Universidades enfrentam a escolha entre conformidade ideológica ('Pacto pela Excelência Acadêmica') ou perda de bilhões em financiamento federal e pesquisa (NSF/NIH).",
+    action: "Reescrita sistêmica de regras: taxação de fundos, fim do DEI e pressão sobre acreditadoras.", 
+    insight: "A tática governamental migrou de 'ataques pontuais' para uma reestruturação arquitetônica do setor em 2026. Universidades enfrentam a escolha entre conformidade ideológica ou perda de bilhões em financiamento federal (NSF/NIH).",
     source: "Higher Ed Dive / CT Mirror",
     icon: Landmark 
   },
   { 
     name: "China", 
     role: "Potência Epistêmica", 
-    action: "Plataforma nacional conecta 1.300+ universidades globais. Lidera a produção científica de alto impacto em STEM.", 
-    insight: "Em busca de 'autonomia estratégica', Pequim não depende mais primariamente de enviar alunos ao Ocidente. Ao contrário, financia infraestrutura de ponta e exporta seu ecossistema educacional, consolidando 'soft power' no Sul Global.",
+    action: "Plataforma nacional conecta 1.300+ universidades globais. Lidera a produção em STEM.", 
+    insight: "Em busca de 'autonomia estratégica', Pequim financia infraestrutura de ponta e exporta seu ecossistema educacional, consolidando 'soft power' tecnológico no Sul Global.",
     source: "Global Policy Journal / Frontiers",
     icon: Flag 
   },
   { 
     name: "Reino Unido", 
-    role: "Novo Destino Global", 
-    action: "Beneficiário direto da reordenação geopolítica e das restrições americanas, assumindo a liderança na atração de talentos internacionais.", 
+    role: "Novo Destino", 
+    action: "Beneficiário direto da reordenação geopolítica, atrai o talento repelido pelos EUA.", 
     insight: "O soft power educacional britânico se aproveita das incertezas americanas para capturar fatias do mercado de estudantes asiáticos, compensando as perdas do pós-Brexit.",
     source: "QS Quacquarelli Symonds",
     icon: MapPin 
   },
   { 
-    name: "BRICS & Sul Global", 
-    role: "O Bloco Descentralizador", 
-    action: "A 'Aliança Digital de Educação' e plataformas estatais (como SWAYAM na Índia) reformulam a geopolítica da cooperação.", 
+    name: "BRICS & Sul", 
+    role: "Bloco Descentralizador", 
+    action: "A 'Aliança Digital de Educação' e plataformas estatais reformulam a cooperação.", 
     insight: "O monopólio do eixo EUA-Europa acabou. O Sul Global deixa de ser apenas consumidor de conteúdo ocidental para se tornar exportador de infraestrutura educacional massiva e de baixo custo.",
-    source: "Frontiers in Education / BRICS Alliance",
+    source: "Frontiers in Education",
     icon: Globe2 
   },
   { 
     name: "Big Tech", 
-    role: "A Universidade Paralela", 
-    action: "Microsoft, NVIDIA e plataformas (Coursera) lançam milhões de certificações massivas focadas em empregabilidade tecnológica.", 
-    insight: "As gigantes de tecnologia deixaram de ser apenas 'parceiras' para se tornarem concorrentes diretas no reskilling. Elas definem o currículo das novas engenharias e formam para 'day-one-ready roles'.",
-    source: "Research.com / Relatórios Setoriais",
+    role: "Universidade Paralela", 
+    action: "Microsoft e Coursera lançam certificações focadas em empregabilidade direta.", 
+    insight: "As gigantes de tecnologia deixaram de ser apenas 'parceiras' para se tornarem concorrentes diretas no reskilling. Elas definem o currículo e formam para 'day-one-ready roles'.",
+    source: "Research.com",
     icon: MonitorPlay 
   },
   { 
-    name: "Agências de Rating", 
-    role: "Os Reguladores Silenciosos", 
-    action: "Monitoram a viabilidade frente a um crescimento de receitas projetado de apenas 3,5% contra uma inflação de custos de 4,4% (2026).", 
-    insight: "Entidades como Moody's e S&P definem o ritmo de sobrevivência das instituições. Ao rebaixar o crédito de IES dependentes de mensalidades, precipitam fusões e aquisições.",
-    source: "Moody's Ratings / S&P Global",
+    name: "Agências Rating", 
+    role: "Reguladores Silenciosos", 
+    action: "Monitoram a viabilidade frente a um crescimento de receitas de 3,5% vs inflação de 4,4%.", 
+    insight: "Entidades como Moody's e S&P definem o ritmo de sobrevivência das instituições. Ao rebaixar o crédito de IES dependentes de mensalidades, precipitam fusões e aquisições inegociáveis.",
+    source: "Moody's Ratings",
     icon: Activity 
   }
 ];
 
 const careers = [
   { 
-    title: "Design Comportamental & Terapêuticas Digitais (DTx)", 
+    title: "Design Comportamental & Terapêuticas Digitais", 
     desc: "A intersecção clínica e produto. Terapêuticas digitais saíram de pilotos para tratamento regulamentado.",
-    insight: "O mercado de DTx cresce a um CAGR de 28,3%. Profissionais precisam unir ciência comportamental (TCC, 'Tiny Habits') e UX/UI para desenhar apps que alteram comportamentos médicos. Adesão do paciente é tratada como o próprio requisito de eficácia clínica.",
-    source: "Digital Therapeutics Alliance / Binariks"
+    insight: "O mercado de DTx cresce 28,3% ao ano. Profissionais unem ciência comportamental e UX para criar apps médicos. Adesão é tratada como requisito de eficácia clínica.",
+    source: "Digital Therapeutics Alliance"
   },
   { 
     title: "Engenharia de IA Aplicada", 
-    desc: "O 'mestre de obras' que constrói a infraestrutura projetada. Demanda profunda por MLOps, cloud e engenharia de software.",
-    insight: "Marca a transição da IA 'de laboratório' para a 'IA em produção'. Enquanto os cientistas de dados desenham o modelo teórico, o engenheiro de IA garante a escalabilidade, integração com sistemas legados da IES ou empresa, e redução de custos de API.",
-    source: "Alura / Fórum Econômico Mundial"
+    desc: "O 'mestre de obras' que constrói a infraestrutura projetada. Demanda por MLOps e cloud.",
+    insight: "Enquanto cientistas de dados desenham o modelo teórico, o engenheiro de IA garante escalabilidade, integração com sistemas legados e redução de custos de API na prática.",
+    source: "Alura / Fórum Econômico"
   },
   { 
     title: "Auditoria e Governança de IA", 
-    desc: "Garantia de ética, ausência de viés algorítmico e compliance com novas legislações sistêmicas.",
-    insight: "Impulsionada pela Lei de IA da UE. Empresas e governos precisam provar auditorialmente que seus algoritmos não violam direitos autorais ou perpetuam preconceitos (viés algorítmico). Exige um perfil totalmente híbrido entre Direito e Data Science.",
+    desc: "Garantia de ética, ausência de viés algorítmico e compliance com novas legislações.",
+    insight: "Empresas precisam provar auditorialmente que algoritmos não violam direitos. Exige um perfil híbrido raro entre Direito, Ética e Data Science.",
     source: "MEC / McKinsey Insights"
   },
   { 
-    title: "Engenharias Tradicionais 'IA-Infused'", 
-    desc: "Civil, Mecânica e Elétrica com currículos totalmente reformulados para integrar automação e gêmeos digitais.",
-    insight: "Fim dos cálculos estruturais repetitivos: a IA Generativa elabora as fundações e plantas em segundos. O novo engenheiro avalia e gerencia Gêmeos Digitais (Digital Twins), focando tempo em transição energética e sustentabilidade dos materiais.",
-    source: "Consed / Diretrizes Curriculares 2026"
+    title: "Engenharias 'IA-Infused'", 
+    desc: "Civil, Mecânica e Elétrica com currículos totalmente reformulados para integrar automação.",
+    insight: "A IA elabora as fundações e plantas em segundos. O novo engenheiro avalia e gerencia Gêmeos Digitais (Digital Twins), focando tempo em sustentabilidade e eficiência.",
+    source: "Diretrizes Curriculares 2026"
   }
 ];
 
@@ -103,22 +103,22 @@ const StatCard = ({ stat }) => {
   const [expanded, setExpanded] = useState(false);
   return (
     <div 
-      className="bg-white p-8 rounded-3xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300"
+      className="bg-white p-6 md:p-8 rounded-3xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 w-full"
       onClick={() => setExpanded(!expanded)}
     >
       <div className="flex justify-between items-start mb-2">
-        <p className="text-[#86868b] text-sm font-medium">{stat.label}</p>
-        <Plus className={`w-5 h-5 text-blue-500 transition-transform duration-300 ${expanded ? 'rotate-45' : ''}`} />
+        <p className="text-[#86868b] text-xs md:text-sm font-medium">{stat.label}</p>
+        <Plus className={`w-5 h-5 text-blue-500 transition-transform duration-300 shrink-0 ${expanded ? 'rotate-45' : ''}`} />
       </div>
-      <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-[#1d1d1f] mb-2">{stat.value}</h3>
-      <p className="text-sm text-[#86868b]">{stat.sub}</p>
+      <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1d1d1f] mb-2">{stat.value}</h3>
+      <p className="text-xs md:text-sm text-[#86868b]">{stat.sub}</p>
       
-      <div className={`grid transition-all duration-500 ease-in-out ${expanded ? 'grid-rows-[1fr] opacity-100 mt-6' : 'grid-rows-[0fr] opacity-0'}`}>
+      <div className={`grid transition-all duration-500 ease-in-out ${expanded ? 'grid-rows-[1fr] opacity-100 mt-4 md:mt-6' : 'grid-rows-[0fr] opacity-0'}`}>
         <div className="overflow-hidden">
-          <div className="p-4 bg-blue-50 rounded-2xl text-sm text-gray-800 border-l-2 border-blue-500">
+          <div className="p-3 md:p-4 bg-blue-50 rounded-2xl text-xs md:text-sm text-gray-800 border-l-2 border-blue-500">
             <strong>Foresight Insight:</strong> {stat.insight}
           </div>
-          <p className="text-[10px] text-gray-400 mt-3 uppercase tracking-wider">Fonte: {stat.source}</p>
+          <p className="text-[9px] md:text-[10px] text-gray-400 mt-3 uppercase tracking-wider break-words">Fonte: {stat.source}</p>
         </div>
       </div>
     </div>
@@ -129,24 +129,24 @@ const ForceCard = ({ force }) => {
   const [expanded, setExpanded] = useState(false);
   return (
     <div 
-      className="bg-white p-8 rounded-3xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] flex flex-col h-full cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300"
+      className="bg-white p-6 md:p-8 rounded-3xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] flex flex-col h-full cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 w-full"
       onClick={() => setExpanded(!expanded)}
     >
-      <div className="flex justify-between items-start mb-6">
-        <div className="bg-[#f5f5f7] w-14 h-14 rounded-2xl flex items-center justify-center">
-          <force.icon className="w-7 h-7 text-[#1d1d1f]" />
+      <div className="flex justify-between items-start mb-4 md:mb-6">
+        <div className="bg-[#f5f5f7] w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center shrink-0">
+          <force.icon className="w-6 h-6 md:w-7 md:h-7 text-[#1d1d1f]" />
         </div>
-        <Plus className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${expanded ? 'rotate-45 text-blue-500' : ''}`} />
+        <Plus className={`w-5 h-5 text-gray-400 transition-transform duration-300 shrink-0 ${expanded ? 'rotate-45 text-blue-500' : ''}`} />
       </div>
-      <h3 className="text-xl font-bold mb-3">{force.title}</h3>
-      <p className="text-[#86868b] leading-relaxed flex-grow">{force.desc}</p>
+      <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3">{force.title}</h3>
+      <p className="text-sm md:text-base text-[#86868b] leading-relaxed flex-grow">{force.desc}</p>
       
       <div className={`grid transition-all duration-500 ease-in-out ${expanded ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0'}`}>
         <div className="overflow-hidden">
-          <div className="p-4 bg-gray-50 rounded-xl text-sm text-gray-700 border-l-2 border-gray-800">
+          <div className="p-3 md:p-4 bg-gray-50 rounded-xl text-xs md:text-sm text-gray-700 border-l-2 border-gray-800">
             {force.insight}
           </div>
-          <p className="text-[10px] text-gray-400 mt-3 uppercase tracking-wider font-semibold">Fonte: {force.source}</p>
+          <p className="text-[9px] md:text-[10px] text-gray-400 mt-3 uppercase tracking-wider font-semibold break-words">Fonte: {force.source}</p>
         </div>
       </div>
     </div>
@@ -157,46 +157,46 @@ const ActorCard = ({ actor }) => {
   const [expanded, setExpanded] = useState(false);
   return (
     <div 
-      className={`p-6 md:p-8 rounded-3xl transition-all duration-500 border cursor-pointer group ${
+      className={`p-5 md:p-8 rounded-3xl transition-all duration-500 border cursor-pointer w-full group ${
         expanded 
-          ? 'bg-[#1d1d1f] text-white border-transparent shadow-2xl scale-[1.02] z-10 relative' 
+          ? 'bg-[#1d1d1f] text-white border-transparent shadow-2xl scale-[1.01] md:scale-[1.02] z-10 relative' 
           : 'bg-white hover:bg-[#f5f5f7] border-gray-100 hover:border-blue-100'
       }`}
       onClick={() => setExpanded(!expanded)}
     >
-      <div className="flex gap-6 items-start">
-        <div className={`p-4 rounded-2xl shrink-0 transition-colors duration-300 ${expanded ? 'bg-gray-800' : 'bg-[#f5f5f7]'}`}>
-          <actor.icon className={`w-7 h-7 ${expanded ? 'text-blue-400' : 'text-[#1d1d1f]'}`} />
+      <div className="flex gap-4 md:gap-6 items-start">
+        <div className={`p-3 md:p-4 rounded-2xl shrink-0 transition-colors duration-300 ${expanded ? 'bg-gray-800' : 'bg-[#f5f5f7]'}`}>
+          <actor.icon className={`w-6 h-6 md:w-7 md:h-7 ${expanded ? 'text-blue-400' : 'text-[#1d1d1f]'}`} />
         </div>
-        <div className="flex-1">
-          <h3 className="text-xl font-bold flex flex-wrap items-center gap-3 mb-3">
+        <div className="flex-1 min-w-0">
+          <h3 className="text-lg md:text-xl font-bold flex flex-wrap items-center gap-2 mb-2">
             {actor.name} 
-            <span className={`text-xs font-semibold px-2 py-1 rounded-full transition-colors duration-300 ${expanded ? 'bg-blue-600/30 text-blue-300' : 'text-[#0066cc] bg-blue-50 group-hover:bg-blue-100'}`}>
+            <span className={`text-[10px] md:text-xs font-semibold px-2 py-1 rounded-full transition-colors duration-300 ${expanded ? 'bg-blue-600/30 text-blue-300' : 'text-[#0066cc] bg-blue-50 group-hover:bg-blue-100'}`}>
               {actor.role}
             </span>
           </h3>
-          <p className={`leading-relaxed text-sm transition-colors duration-300 ${expanded ? 'text-gray-300' : 'text-[#86868b]'}`}>
+          <p className={`leading-relaxed text-xs md:text-sm transition-colors duration-300 ${expanded ? 'text-gray-300' : 'text-[#86868b]'}`}>
             {actor.action}
           </p>
         </div>
-        <button className={`shrink-0 mt-1 transition-transform duration-500 ${expanded ? 'rotate-180 text-white' : 'text-gray-400 group-hover:text-blue-500'}`}>
+        <button className={`shrink-0 mt-1 transition-transform duration-500 ${expanded ? 'rotate-180 text-white' : 'text-gray-400'}`}>
           <ChevronDown className="w-5 h-5" />
         </button>
       </div>
 
       <div 
-        className={`grid transition-all duration-500 ease-in-out ${expanded ? 'grid-rows-[1fr] opacity-100 mt-6' : 'grid-rows-[0fr] opacity-0'}`}
+        className={`grid transition-all duration-500 ease-in-out ${expanded ? 'grid-rows-[1fr] opacity-100 mt-4 md:mt-6' : 'grid-rows-[0fr] opacity-0'}`}
       >
         <div className="overflow-hidden">
-          <div className="p-6 bg-gray-800/60 rounded-2xl border border-gray-700/50">
-            <h4 className="text-[11px] font-bold text-blue-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+          <div className="p-4 md:p-6 bg-gray-800/60 rounded-2xl border border-gray-700/50">
+            <h4 className="text-[10px] md:text-[11px] font-bold text-blue-400 uppercase tracking-widest mb-2 md:mb-3 flex items-center gap-2">
               <Search className="w-3 h-3" />
               Foresight Analysis
             </h4>
-            <p className="text-[15px] text-gray-200 leading-relaxed font-light">
+            <p className="text-xs md:text-[15px] text-gray-200 leading-relaxed font-light">
               {actor.insight}
             </p>
-            <p className="text-[10px] text-gray-500 mt-4 uppercase tracking-wider font-semibold">Fonte: {actor.source}</p>
+            <p className="text-[9px] md:text-[10px] text-gray-500 mt-4 uppercase tracking-wider font-semibold break-words">Fonte: {actor.source}</p>
           </div>
         </div>
       </div>
@@ -208,29 +208,29 @@ const CareerCard = ({ career }) => {
   const [expanded, setExpanded] = useState(false);
   return (
     <div 
-      className={`bg-white p-8 rounded-3xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] border border-gray-100 cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 flex flex-col h-full ${expanded ? 'ring-2 ring-blue-500 ring-offset-2' : ''}`}
+      className={`bg-white p-6 md:p-8 rounded-3xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] border border-gray-100 cursor-pointer transition-all duration-300 flex flex-col h-full w-full ${expanded ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)]'}`}
       onClick={() => setExpanded(!expanded)}
     >
       <div className="flex justify-between items-start mb-4">
-        <div className="p-3 bg-blue-50 rounded-2xl">
-          <Briefcase className="w-6 h-6 text-blue-600" />
+        <div className="p-2 md:p-3 bg-blue-50 rounded-2xl shrink-0">
+          <Briefcase className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
         </div>
-        <Plus className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${expanded ? 'rotate-45 text-blue-500' : ''}`} />
+        <Plus className={`w-5 h-5 text-gray-400 transition-transform duration-300 shrink-0 ${expanded ? 'rotate-45 text-blue-500' : ''}`} />
       </div>
-      <h3 className="text-lg font-bold mb-3 leading-snug">{career.title}</h3>
-      <p className="text-[#86868b] text-sm leading-relaxed flex-grow">{career.desc}</p>
+      <h3 className="text-base md:text-lg font-bold mb-2 md:mb-3 leading-snug">{career.title}</h3>
+      <p className="text-[#86868b] text-xs md:text-sm leading-relaxed flex-grow">{career.desc}</p>
       
       <div className={`grid transition-all duration-500 ease-in-out ${expanded ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0'}`}>
         <div className="overflow-hidden">
           <div className="pt-4 border-t border-gray-100">
-            <h4 className="text-[11px] font-bold text-blue-500 uppercase tracking-widest mb-2 flex items-center gap-1">
+            <h4 className="text-[10px] md:text-[11px] font-bold text-blue-500 uppercase tracking-widest mb-2 flex items-center gap-1">
               <Search className="w-3 h-3" />
               Análise de Mercado
             </h4>
-            <p className="text-sm text-gray-700 leading-relaxed font-light mb-3">
+            <p className="text-xs md:text-sm text-gray-700 leading-relaxed font-light mb-3">
               {career.insight}
             </p>
-            <p className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Fonte: {career.source}</p>
+            <p className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-wider font-semibold break-words">Fonte: {career.source}</p>
           </div>
         </div>
       </div>
@@ -240,69 +240,72 @@ const CareerCard = ({ career }) => {
 
 export default function InfographicApp() {
   return (
-    <div style={{ fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif' }} className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f] selection:bg-[#0066cc] selection:text-white pb-20">
+    <div style={{ fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif' }} className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f] selection:bg-[#0066cc] selection:text-white pb-16 md:pb-20 overflow-x-hidden">
       
-      {/* Header - Apple Style */}
-      <header className="pt-24 pb-16 px-6 text-center max-w-4xl mx-auto">
-        <h2 className="text-[#0066cc] font-semibold tracking-widest uppercase text-sm mb-4">Relatório Executivo • 2026</h2>
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">
-          O Futuro do <br />Ensino Superior.
+      {/* Header - Apple Style (Mobile Optimized) */}
+      <header className="pt-16 md:pt-24 pb-12 md:pb-16 px-4 md:px-6 text-center max-w-4xl mx-auto">
+        <h2 className="text-[#0066cc] font-semibold tracking-widest uppercase text-xs md:text-sm mb-3 md:mb-4">Relatório Executivo • 2026</h2>
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-4 md:mb-6 leading-tight">
+          O Futuro do <br className="hidden sm:block"/>Ensino Superior.
         </h1>
-        <p className="text-xl md:text-2xl text-[#86868b] font-light leading-relaxed mb-8">
-          A educação não está apenas mudando. Ela está sendo reescrita estruturalmente. A interseção entre o colapso demográfico global, a IA preditiva e a nova regulação brasileira moldam o cenário.
+        <p className="text-lg sm:text-xl md:text-2xl text-[#86868b] font-light leading-relaxed mb-6 md:mb-8 px-2">
+          A educação está sendo reescrita estruturalmente. A interseção entre o colapso demográfico global, a IA preditiva e a regulação brasileira moldam o cenário.
         </p>
       </header>
 
       {/* Introdução Didática */}
-      <section className="max-w-4xl mx-auto px-6 mb-16 text-lg text-gray-600 leading-relaxed font-light">
-        <p className="mb-4">
-          Neste documento interativo de Foresight Estratégico, destilamos os sinais vitais que os gestores educacionais precisam compreender para operar no novo ciclo. 
-          O ano de 2026 marca o início matemático de um declínio projetado de 15 anos no número de novos universitários no hemisfério norte. 
-        </p>
-        <p>
-          Simultaneamente, no Brasil, enfrentamos um "penhasco induzido": as novas regras do MEC (Decreto nº 12.456) forçam uma reorganização drástica no ensino EAD. 
-          <strong className="font-semibold text-gray-900"> Explore os cards abaixo clicando neles para revelar os insights estratégicos.</strong>
-        </p>
+      <section className="max-w-4xl mx-auto px-4 md:px-6 mb-12 md:mb-16 text-base md:text-lg text-gray-600 leading-relaxed font-light">
+        <div className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100">
+          <p className="mb-4">
+            Neste documento interativo, destilamos os sinais vitais do ciclo educacional. O ano de 2026 marca o início matemático de um <strong>declínio projetado de 15 anos</strong> no número de novos universitários no hemisfério norte. 
+          </p>
+          <p>
+            Simultaneamente, o Brasil enfrenta um "penhasco induzido": as <strong>novas regras do MEC (Decreto nº 12.456)</strong> forçam uma reorganização drástica no ensino EAD. 
+            <span className="block mt-4 text-blue-600 font-medium bg-blue-50 px-4 py-2 rounded-xl inline-block text-sm md:text-base">
+              💡 Explore os cards clicando neles para revelar os insights e fontes.
+            </span>
+          </p>
+        </div>
       </section>
 
+      { }
       {/* Big Numbers Dashboard */}
-      <section className="px-6 max-w-7xl mx-auto mb-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="px-4 md:px-6 max-w-7xl mx-auto mb-16 md:mb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {bigNumbers.map((stat, idx) => (
             <StatCard key={idx} stat={stat} />
           ))}
         </div>
       </section>
 
+      {}
       {/* Forças Motrizes */}
-      <section className="px-6 max-w-7xl mx-auto mb-24">
-        <div className="mb-12 max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">As forças que moldam o jogo.</h2>
-          <p className="text-xl text-[#86868b] font-light">
-            Sinais fortes e fracos que redefinem desde a matriz curricular até a sobrevivência financeira. O ensino híbrido e o "lifelong learning" são regras, não exceções.
+      <section className="px-4 md:px-6 max-w-7xl mx-auto mb-16 md:mb-24">
+        <div className="mb-8 md:mb-12 max-w-3xl">
+          <h2 className="text-2xl md:text-4xl font-bold tracking-tight mb-3 md:mb-4">As forças que moldam o jogo.</h2>
+          <p className="text-lg md:text-xl text-[#86868b] font-light">
+            Sinais fortes e fracos que redefinem desde a matriz curricular até a sobrevivência financeira.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {forces.map((force, idx) => (
             <ForceCard key={idx} force={force} />
           ))}
         </div>
       </section>
 
+      {}
       {/* Atores */}
-      <section className="bg-white py-24 mb-24">
-        <div className="px-6 max-w-7xl mx-auto">
-          <div className="mb-16 max-w-2xl">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Quem edita as novas regras.</h2>
-            <p className="text-xl text-[#86868b] font-light mb-4">
-              Governos atuam como reguladores agressivos, enquanto corporações assumem papel de educadores paralelos.
-            </p>
-            <p className="text-sm font-medium text-blue-600 bg-blue-50 inline-block px-4 py-2 rounded-full">
-              Clique nos cards abaixo para revelar as análises avançadas.
+      <section className="bg-white py-16 md:py-24 mb-16 md:mb-24 border-y border-gray-100">
+        <div className="px-4 md:px-6 max-w-7xl mx-auto">
+          <div className="mb-10 md:mb-16 max-w-2xl">
+            <h2 className="text-2xl md:text-4xl font-bold tracking-tight mb-3 md:mb-4">Quem edita as novas regras.</h2>
+            <p className="text-lg md:text-xl text-[#86868b] font-light mb-4">
+              Governos atuam como reguladores, corporações como educadores paralelos.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
             {actors.map((actor, idx) => (
               <ActorCard key={idx} actor={actor} />
             ))}
@@ -310,50 +313,52 @@ export default function InfographicApp() {
         </div>
       </section>
 
+      {}
       {/* O Recorte Brasil */}
-      <section className="px-6 max-w-7xl mx-auto mb-24">
-        <div className="border-l-4 border-[#1d1d1f] pl-6 md:pl-10 mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">O Paradoxo Brasileiro (2026)</h2>
-          <p className="text-xl text-[#86868b] font-light max-w-3xl">
+      <section className="px-4 md:px-6 max-w-7xl mx-auto mb-16 md:mb-24">
+        <div className="border-l-4 border-[#1d1d1f] pl-4 md:pl-8 mb-8 md:mb-12">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-3 md:mb-4">O Paradoxo Brasileiro</h2>
+          <p className="text-lg md:text-xl text-[#86868b] font-light max-w-3xl">
             O Brasil não sofre do penhasco demográfico por falta de jovens, mas por um déficit de conversão somado à retração do financiamento (FIES/Prouni).
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6">
-          <div className="bg-white p-8 md:p-12 rounded-3xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] relative overflow-hidden">
-            <div className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold px-4 py-1 rounded-bl-xl">ALERTA REGULATÓRIO</div>
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-8 border-b border-gray-100 pb-8">
-              <div className="p-4 bg-red-50 rounded-2xl shrink-0">
-                <AlertTriangle className="w-10 h-10 text-red-500" />
+        <div className="w-full">
+          <div className="bg-white p-6 md:p-12 rounded-3xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] relative overflow-hidden border border-red-50">
+            <div className="absolute top-0 right-0 bg-red-500 text-white text-[10px] md:text-xs font-bold px-3 py-1 md:px-4 md:py-1 rounded-bl-xl">ALERTA REGULATÓRIO</div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6 md:mb-8 border-b border-gray-100 pb-6 md:pb-8">
+              <div className="p-3 md:p-4 bg-red-50 rounded-2xl shrink-0">
+                <AlertTriangle className="w-8 h-8 md:w-10 md:h-10 text-red-500" />
               </div>
               <div>
-                <h3 className="text-3xl font-bold text-[#1d1d1f]">O Marco do EAD (Adequação até 2027)</h3>
-                <p className="text-lg text-[#86868b] mt-2">O Decreto MEC nº 12.456 cria um "penhasco induzido" no setor privado.</p>
+                <h3 className="text-2xl md:text-3xl font-bold text-[#1d1d1f] leading-tight">O Marco do EAD</h3>
+                <p className="text-sm md:text-lg text-[#86868b] mt-1 md:mt-2">O Decreto MEC nº 12.456 cria um "penhasco induzido".</p>
               </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="space-y-3">
-                <h4 className="font-bold text-gray-900 flex items-center gap-2"><ArrowRight className="w-4 h-4 text-red-500"/> Fim do "Crescimento Fácil"</h4>
-                <p className="text-gray-600 text-sm leading-relaxed">Novas regras travam licenciaturas 100% online. Cursos da área da saúde agora ficam completamente restritos à modalidade presencial, exigindo mudança imediata de modelo de negócios.</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+              <div className="space-y-2 md:space-y-3">
+                <h4 className="font-bold text-gray-900 flex items-center gap-2 text-sm md:text-base"><ArrowRight className="w-4 h-4 text-red-500 shrink-0"/> Fim do "Crescimento Fácil"</h4>
+                <p className="text-gray-600 text-xs md:text-sm leading-relaxed">Novas regras travam licenciaturas 100% online. Cursos da área da saúde agora ficam restritos à modalidade presencial.</p>
               </div>
-              <div className="space-y-3">
-                <h4 className="font-bold text-gray-900 flex items-center gap-2"><ArrowRight className="w-4 h-4 text-red-500"/> Extinção de Polos</h4>
-                <p className="text-gray-600 text-sm leading-relaxed">Projeta-se o fechamento inevitável de até 25.000 polos no interior do país pela exigência de infraestrutura física dedicada, prejudicando a capilaridade da educação nacional.</p>
+              <div className="space-y-2 md:space-y-3">
+                <h4 className="font-bold text-gray-900 flex items-center gap-2 text-sm md:text-base"><ArrowRight className="w-4 h-4 text-red-500 shrink-0"/> Extinção de Polos</h4>
+                <p className="text-gray-600 text-xs md:text-sm leading-relaxed">Projeta-se o fechamento de até 25.000 polos no interior pela exigência de infraestrutura física dedicada, prejudicando a capilaridade.</p>
               </div>
-              <div className="space-y-3">
-                <h4 className="font-bold text-gray-900 flex items-center gap-2"><ArrowRight className="w-4 h-4 text-red-500"/> Complexidade Operacional</h4>
-                <p className="text-gray-600 text-sm leading-relaxed">O planejamento acadêmico exige agora modelos complexos para garantir que alunos matriculados nas regras antigas (100% EAD) e novas coexistam juridicamente até a virada definitiva.</p>
+              <div className="space-y-2 md:space-y-3">
+                <h4 className="font-bold text-gray-900 flex items-center gap-2 text-sm md:text-base"><ArrowRight className="w-4 h-4 text-red-500 shrink-0"/> Complexidade Jurídica</h4>
+                <p className="text-gray-600 text-xs md:text-sm leading-relaxed">O planejamento acadêmico exige modelos complexos para garantir que alunos nas regras antigas e novas coexistam até maio de 2027.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      {}
       {/* Carreiras do Futuro */}
-      <section className="px-6 max-w-7xl mx-auto mb-24">
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-8 text-center">A Nova Demanda Curricular</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="px-4 md:px-6 max-w-7xl mx-auto mb-16 md:mb-24">
+        <h2 className="text-2xl md:text-4xl font-bold tracking-tight mb-6 md:mb-8 text-center">A Nova Demanda Curricular</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {careers.map((career, idx) => (
             <CareerCard key={idx} career={career} />
           ))}
@@ -361,14 +366,14 @@ export default function InfographicApp() {
       </section>
 
       {/* Footer / Fontes */}
-      <footer className="px-6 max-w-7xl mx-auto border-t border-gray-200 pt-12 pb-8 text-center">
-        <h4 className="text-sm font-semibold text-[#1d1d1f] uppercase tracking-wider mb-6">Metodologia e Fontes de Foresight 2026</h4>
-        <div className="flex flex-wrap justify-center gap-2 text-xs text-[#86868b] max-w-4xl mx-auto">
-          {["Decreto MEC 12.456/2025", "Tyton Partners", "QS Quacquarelli Symonds", "Global Policy Journal", "Moody's Ratings", "Research.com", "ABMES / Semesp", "Pearson Higher Education (2026)", "Mattos Filho (Regulatório)", "Gupy (Tendências Trabalho)"].map((fonte, i) => (
-            <span key={i} className="bg-gray-200/50 px-3 py-1.5 rounded-full hover:bg-gray-200 transition-colors cursor-default">{fonte}</span>
+      <footer className="px-4 md:px-6 max-w-7xl mx-auto border-t border-gray-200 pt-10 md:pt-12 pb-6 md:pb-8 text-center">
+        <h4 className="text-xs md:text-sm font-semibold text-[#1d1d1f] uppercase tracking-wider mb-4 md:mb-6">Metodologia e Fontes de Foresight</h4>
+        <div className="flex flex-wrap justify-center gap-2 text-[10px] md:text-xs text-[#86868b] max-w-4xl mx-auto">
+          {["Decreto MEC 12.456/2025", "Tyton Partners", "QS Quacquarelli Symonds", "Global Policy Journal", "Moody's Ratings", "Research.com", "Digital Therapeutics Alliance", "MEC", "INEP"].map((fonte, i) => (
+            <span key={i} className="bg-gray-200/50 px-2 py-1 md:px-3 md:py-1.5 rounded-full hover:bg-gray-200 transition-colors cursor-default border border-gray-100">{fonte}</span>
           ))}
         </div>
-        <p className="mt-8 text-xs text-gray-400">Design de Futuros • Elaborado via síntese de dados macro-ambientais de educação e trabalho (Cenário 2026).</p>
+        <p className="mt-6 md:mt-8 text-[10px] md:text-xs text-gray-400">Design de Futuros • Elaborado via síntese de dados macro-ambientais (Cenário 2026).</p>
       </footer>
     </div>
   );
