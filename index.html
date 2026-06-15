@@ -1,380 +1,547 @@
-import React, { useState } from 'react';
-import { 
-  TrendingDown, Cpu, Globe2, RefreshCw, GraduationCap, Building2, 
-  Landmark, Flag, MonitorPlay, Briefcase, AlertTriangle, Activity, 
-  ArrowRight, MapPin, Search, ChevronDown, Plus
-} from 'lucide-react';
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth antialiased">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Futuro do Ensino Superior 2026-2035</title>
+    
+    <!-- Fonte Inter como fallback elegante para ambientes não-Apple -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-const bigNumbers = [
-  { value: "15 anos", label: "Declínio de calouros", sub: "Início do penhasco demográfico nos EUA", source: "Tyton Partners / AGB", insight: "Instituições dependentes de mensalidades (tuition-driven) e sem grandes fundos patrimoniais sofrerão mais. O modelo pivotou para 'alunos não-tradicionais'." },
-  { value: "3,5%", label: "Crescimento receita setor", sub: "vs 4,4% de aumento de custos em 2026", source: "Moody's Ratings", insight: "Os custos estão superando as receitas. Agências de rating atuam como 'reguladores silenciosos', forçando fusões e consolidação." },
-  { value: "315M+", label: "Alunos em MOOCs (2025)", sub: "Exclui o gigantesco mercado chinês", source: "Research.com", insight: "Big Techs não são apenas parceiras, são concorrentes paralelas. Microsoft, Coursera e NVIDIA estão formando direto para 'day-one-ready roles'." },
-  { value: "+210%", label: "Plataforma China", sub: "Crescimento de usuários (2024)", source: "Global Policy Journal", insight: "A China não apenas forma talentos, mas exporta infraestrutura. A plataforma nacional já conecta mais de 1.300 universidades globais." }
-];
+    <!-- Estilos globais focados no Apple Design System -->
+    <style>
+        :root {
+            --apple-bg: #f5f5f7;
+            --apple-text: #1d1d1f;
+            --apple-gray: #86868b;
+            --apple-blue: #0071e3;
+            --apple-red: #ff3b30;
+        }
+        body {
+            /* Prioriza a fonte San Francisco em dispositivos Apple, e Inter em outros */
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: var(--apple-bg);
+            color: var(--apple-text);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        ::selection {
+            background-color: var(--apple-blue);
+            color: white;
+        }
+        /* Utilitário para esconder scrollbar mantendo a funcionalidade */
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Sombra hiper-suave estilo Apple */
+        .apple-shadow {
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+        }
+        .apple-shadow-hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden pb-16 md:pb-24">
 
-const forces = [
-  { icon: TrendingDown, title: "Colapso Demográfico", desc: "O pico de jovens de 18 anos passa. Matrículas caem por 15 anos consecutivos nos EUA e Europa.", insight: "No Brasil o problema não é natalidade (ainda), mas a baixa conversão: apenas 33% dos concluintes do ensino médio vão para a universidade.", source: "Tyton Partners / EDMO / AGB" },
-  { icon: Cpu, title: "O Fim do Tamanho Único", desc: "IA Generativa cruzou o limiar. Deixou de ser experimento e virou infraestrutura de engajamento 24/7.", insight: "IA atua como tutor preditivo. O engajamento torna-se a nova métrica de retenção, evitando a evasão antes dela acontecer.", source: "Scholaro / ETS" },
-  { icon: Globe2, title: "Reordenação Geopolítica", desc: "Reino Unido projetado para superar os EUA como maior destino global até 2030.", insight: "A 'Aliança Digital BRICS' cria vias alternativas, contornando a dependência do eixo tradicional EUA-Europa.", source: "QS Quacquarelli Symonds / Frontiers" },
-  { icon: RefreshCw, title: "Inversão Sul Global", desc: "SWAYAM (Índia) e Nigéria exportam cursos massivos. O fluxo de conhecimento inverteu.", insight: "Plataformas de baixo custo tornam-se essenciais para estados do Caribe e Pacífico. A 'Southern Theory' ganha força.", source: "Global Policy Journal" },
-  { icon: GraduationCap, title: "Crise do Diploma", desc: "Empregadores exigem provas de habilidades, não apenas papéis. Microcredenciais avançam.", insight: "Transcripts por competência (CLR) começam a substituir o currículo tradicional. O valor do diploma atrela-se à empregabilidade imediata.", source: "ETS / Fórum Econômico Mundial" },
-  { icon: Building2, title: "Consolidação Institucional", desc: "Menos faculdades, porém mais fortes. Fusões, parcerias estratégicas e congelamentos marcam 2026.", insight: "No Brasil, o movimento começa nas pequenas IES privadas frente às novas regras rígidas do MEC para EAD.", source: "Deloitte Insights / Mattos Filho" }
-];
-
-const actors = [
-  { 
-    name: "EUA (Governo)", 
-    role: "Regulador Agressivo", 
-    action: "Reescrita sistêmica de regras: taxação de fundos, fim do DEI e pressão sobre acreditadoras.", 
-    insight: "A tática governamental migrou de 'ataques pontuais' para uma reestruturação arquitetônica do setor em 2026. Universidades enfrentam a escolha entre conformidade ideológica ou perda de bilhões em financiamento federal (NSF/NIH).",
-    source: "Higher Ed Dive / CT Mirror",
-    icon: Landmark 
-  },
-  { 
-    name: "China", 
-    role: "Potência Epistêmica", 
-    action: "Plataforma nacional conecta 1.300+ universidades globais. Lidera a produção em STEM.", 
-    insight: "Em busca de 'autonomia estratégica', Pequim financia infraestrutura de ponta e exporta seu ecossistema educacional, consolidando 'soft power' tecnológico no Sul Global.",
-    source: "Global Policy Journal / Frontiers",
-    icon: Flag 
-  },
-  { 
-    name: "Reino Unido", 
-    role: "Novo Destino", 
-    action: "Beneficiário direto da reordenação geopolítica, atrai o talento repelido pelos EUA.", 
-    insight: "O soft power educacional britânico se aproveita das incertezas americanas para capturar fatias do mercado de estudantes asiáticos, compensando as perdas do pós-Brexit.",
-    source: "QS Quacquarelli Symonds",
-    icon: MapPin 
-  },
-  { 
-    name: "BRICS & Sul", 
-    role: "Bloco Descentralizador", 
-    action: "A 'Aliança Digital de Educação' e plataformas estatais reformulam a cooperação.", 
-    insight: "O monopólio do eixo EUA-Europa acabou. O Sul Global deixa de ser apenas consumidor de conteúdo ocidental para se tornar exportador de infraestrutura educacional massiva e de baixo custo.",
-    source: "Frontiers in Education",
-    icon: Globe2 
-  },
-  { 
-    name: "Big Tech", 
-    role: "Universidade Paralela", 
-    action: "Microsoft e Coursera lançam certificações focadas em empregabilidade direta.", 
-    insight: "As gigantes de tecnologia deixaram de ser apenas 'parceiras' para se tornarem concorrentes diretas no reskilling. Elas definem o currículo e formam para 'day-one-ready roles'.",
-    source: "Research.com",
-    icon: MonitorPlay 
-  },
-  { 
-    name: "Agências Rating", 
-    role: "Reguladores Silenciosos", 
-    action: "Monitoram a viabilidade frente a um crescimento de receitas de 3,5% vs inflação de 4,4%.", 
-    insight: "Entidades como Moody's e S&P definem o ritmo de sobrevivência das instituições. Ao rebaixar o crédito de IES dependentes de mensalidades, precipitam fusões e aquisições inegociáveis.",
-    source: "Moody's Ratings",
-    icon: Activity 
-  }
-];
-
-const careers = [
-  { 
-    title: "Design Comportamental & Terapêuticas Digitais", 
-    desc: "A intersecção clínica e produto. Terapêuticas digitais saíram de pilotos para tratamento regulamentado.",
-    insight: "O mercado de DTx cresce 28,3% ao ano. Profissionais unem ciência comportamental e UX para criar apps médicos. Adesão é tratada como requisito de eficácia clínica.",
-    source: "Digital Therapeutics Alliance"
-  },
-  { 
-    title: "Engenharia de IA Aplicada", 
-    desc: "O 'mestre de obras' que constrói a infraestrutura projetada. Demanda por MLOps e cloud.",
-    insight: "Enquanto cientistas de dados desenham o modelo teórico, o engenheiro de IA garante escalabilidade, integração com sistemas legados e redução de custos de API na prática.",
-    source: "Alura / Fórum Econômico"
-  },
-  { 
-    title: "Auditoria e Governança de IA", 
-    desc: "Garantia de ética, ausência de viés algorítmico e compliance com novas legislações.",
-    insight: "Empresas precisam provar auditorialmente que algoritmos não violam direitos. Exige um perfil híbrido raro entre Direito, Ética e Data Science.",
-    source: "MEC / McKinsey Insights"
-  },
-  { 
-    title: "Engenharias 'IA-Infused'", 
-    desc: "Civil, Mecânica e Elétrica com currículos totalmente reformulados para integrar automação.",
-    insight: "A IA elabora as fundações e plantas em segundos. O novo engenheiro avalia e gerencia Gêmeos Digitais (Digital Twins), focando tempo em sustentabilidade e eficiência.",
-    source: "Diretrizes Curriculares 2026"
-  }
-];
-
-const StatCard = ({ stat }) => {
-  const [expanded, setExpanded] = useState(false);
-  return (
-    <div 
-      className="bg-white p-6 md:p-8 rounded-3xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 w-full"
-      onClick={() => setExpanded(!expanded)}
-    >
-      <div className="flex justify-between items-start mb-2">
-        <p className="text-[#86868b] text-xs md:text-sm font-medium">{stat.label}</p>
-        <Plus className={`w-5 h-5 text-blue-500 transition-transform duration-300 shrink-0 ${expanded ? 'rotate-45' : ''}`} />
-      </div>
-      <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1d1d1f] mb-2">{stat.value}</h3>
-      <p className="text-xs md:text-sm text-[#86868b]">{stat.sub}</p>
-      
-      <div className={`grid transition-all duration-500 ease-in-out ${expanded ? 'grid-rows-[1fr] opacity-100 mt-4 md:mt-6' : 'grid-rows-[0fr] opacity-0'}`}>
-        <div className="overflow-hidden">
-          <div className="p-3 md:p-4 bg-blue-50 rounded-2xl text-xs md:text-sm text-gray-800 border-l-2 border-blue-500">
-            <strong>Foresight Insight:</strong> {stat.insight}
-          </div>
-          <p className="text-[9px] md:text-[10px] text-gray-400 mt-3 uppercase tracking-wider break-words">Fonte: {stat.source}</p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const ForceCard = ({ force }) => {
-  const [expanded, setExpanded] = useState(false);
-  return (
-    <div 
-      className="bg-white p-6 md:p-8 rounded-3xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] flex flex-col h-full cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 w-full"
-      onClick={() => setExpanded(!expanded)}
-    >
-      <div className="flex justify-between items-start mb-4 md:mb-6">
-        <div className="bg-[#f5f5f7] w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center shrink-0">
-          <force.icon className="w-6 h-6 md:w-7 md:h-7 text-[#1d1d1f]" />
-        </div>
-        <Plus className={`w-5 h-5 text-gray-400 transition-transform duration-300 shrink-0 ${expanded ? 'rotate-45 text-blue-500' : ''}`} />
-      </div>
-      <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3">{force.title}</h3>
-      <p className="text-sm md:text-base text-[#86868b] leading-relaxed flex-grow">{force.desc}</p>
-      
-      <div className={`grid transition-all duration-500 ease-in-out ${expanded ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0'}`}>
-        <div className="overflow-hidden">
-          <div className="p-3 md:p-4 bg-gray-50 rounded-xl text-xs md:text-sm text-gray-700 border-l-2 border-gray-800">
-            {force.insight}
-          </div>
-          <p className="text-[9px] md:text-[10px] text-gray-400 mt-3 uppercase tracking-wider font-semibold break-words">Fonte: {force.source}</p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const ActorCard = ({ actor }) => {
-  const [expanded, setExpanded] = useState(false);
-  return (
-    <div 
-      className={`p-5 md:p-8 rounded-3xl transition-all duration-500 border cursor-pointer w-full group ${
-        expanded 
-          ? 'bg-[#1d1d1f] text-white border-transparent shadow-2xl scale-[1.01] md:scale-[1.02] z-10 relative' 
-          : 'bg-white hover:bg-[#f5f5f7] border-gray-100 hover:border-blue-100'
-      }`}
-      onClick={() => setExpanded(!expanded)}
-    >
-      <div className="flex gap-4 md:gap-6 items-start">
-        <div className={`p-3 md:p-4 rounded-2xl shrink-0 transition-colors duration-300 ${expanded ? 'bg-gray-800' : 'bg-[#f5f5f7]'}`}>
-          <actor.icon className={`w-6 h-6 md:w-7 md:h-7 ${expanded ? 'text-blue-400' : 'text-[#1d1d1f]'}`} />
-        </div>
-        <div className="flex-1 min-w-0">
-          <h3 className="text-lg md:text-xl font-bold flex flex-wrap items-center gap-2 mb-2">
-            {actor.name} 
-            <span className={`text-[10px] md:text-xs font-semibold px-2 py-1 rounded-full transition-colors duration-300 ${expanded ? 'bg-blue-600/30 text-blue-300' : 'text-[#0066cc] bg-blue-50 group-hover:bg-blue-100'}`}>
-              {actor.role}
-            </span>
-          </h3>
-          <p className={`leading-relaxed text-xs md:text-sm transition-colors duration-300 ${expanded ? 'text-gray-300' : 'text-[#86868b]'}`}>
-            {actor.action}
-          </p>
-        </div>
-        <button className={`shrink-0 mt-1 transition-transform duration-500 ${expanded ? 'rotate-180 text-white' : 'text-gray-400'}`}>
-          <ChevronDown className="w-5 h-5" />
-        </button>
-      </div>
-
-      <div 
-        className={`grid transition-all duration-500 ease-in-out ${expanded ? 'grid-rows-[1fr] opacity-100 mt-4 md:mt-6' : 'grid-rows-[0fr] opacity-0'}`}
-      >
-        <div className="overflow-hidden">
-          <div className="p-4 md:p-6 bg-gray-800/60 rounded-2xl border border-gray-700/50">
-            <h4 className="text-[10px] md:text-[11px] font-bold text-blue-400 uppercase tracking-widest mb-2 md:mb-3 flex items-center gap-2">
-              <Search className="w-3 h-3" />
-              Foresight Analysis
-            </h4>
-            <p className="text-xs md:text-[15px] text-gray-200 leading-relaxed font-light">
-              {actor.insight}
-            </p>
-            <p className="text-[9px] md:text-[10px] text-gray-500 mt-4 uppercase tracking-wider font-semibold break-words">Fonte: {actor.source}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const CareerCard = ({ career }) => {
-  const [expanded, setExpanded] = useState(false);
-  return (
-    <div 
-      className={`bg-white p-6 md:p-8 rounded-3xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] border border-gray-100 cursor-pointer transition-all duration-300 flex flex-col h-full w-full ${expanded ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)]'}`}
-      onClick={() => setExpanded(!expanded)}
-    >
-      <div className="flex justify-between items-start mb-4">
-        <div className="p-2 md:p-3 bg-blue-50 rounded-2xl shrink-0">
-          <Briefcase className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
-        </div>
-        <Plus className={`w-5 h-5 text-gray-400 transition-transform duration-300 shrink-0 ${expanded ? 'rotate-45 text-blue-500' : ''}`} />
-      </div>
-      <h3 className="text-base md:text-lg font-bold mb-2 md:mb-3 leading-snug">{career.title}</h3>
-      <p className="text-[#86868b] text-xs md:text-sm leading-relaxed flex-grow">{career.desc}</p>
-      
-      <div className={`grid transition-all duration-500 ease-in-out ${expanded ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0'}`}>
-        <div className="overflow-hidden">
-          <div className="pt-4 border-t border-gray-100">
-            <h4 className="text-[10px] md:text-[11px] font-bold text-blue-500 uppercase tracking-widest mb-2 flex items-center gap-1">
-              <Search className="w-3 h-3" />
-              Análise de Mercado
-            </h4>
-            <p className="text-xs md:text-sm text-gray-700 leading-relaxed font-light mb-3">
-              {career.insight}
-            </p>
-            <p className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-wider font-semibold break-words">Fonte: {career.source}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default function InfographicApp() {
-  return (
-    <div style={{ fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif' }} className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f] selection:bg-[#0066cc] selection:text-white pb-16 md:pb-20 overflow-x-hidden">
-      
-      {/* Header - Apple Style (Mobile Optimized) */}
-      <header className="pt-16 md:pt-24 pb-12 md:pb-16 px-4 md:px-6 text-center max-w-4xl mx-auto">
-        <h2 className="text-[#0066cc] font-semibold tracking-widest uppercase text-xs md:text-sm mb-3 md:mb-4">Relatório Executivo • 2026</h2>
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-4 md:mb-6 leading-tight">
-          O Futuro do <br className="hidden sm:block"/>Ensino Superior.
+    <header class="pt-20 md:pt-32 pb-12 md:pb-20 px-6 text-center max-w-5xl mx-auto">
+        <h2 class="text-[#86868b] font-semibold tracking-[0.2em] uppercase text-xs md:text-sm mb-4 md:mb-6">Leitura Estratégica • 2026-2035</h2>
+        <h1 class="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tighter mb-6 md:mb-8 leading-[1.05] text-[#1d1d1f]">
+            A Fábrica de <br class="hidden sm:block"/>Diplomas Fechou.
         </h1>
-        <p className="text-lg sm:text-xl md:text-2xl text-[#86868b] font-light leading-relaxed mb-6 md:mb-8 px-2">
-          A educação está sendo reescrita estruturalmente. A interseção entre o colapso demográfico global, a IA preditiva e a regulação brasileira moldam o cenário.
+        <p class="text-xl sm:text-2xl md:text-3xl text-[#86868b] font-light leading-relaxed max-w-4xl mx-auto tracking-tight">
+            A nova regra é clara: aprendizagem ao longo da vida + IA + conexão real com a indústria + evidência de competência.
         </p>
-      </header>
+    </header>
 
-      {/* Introdução Didática */}
-      <section className="max-w-4xl mx-auto px-4 md:px-6 mb-12 md:mb-16 text-base md:text-lg text-gray-600 leading-relaxed font-light">
-        <div className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100">
-          <p className="mb-4">
-            Neste documento interativo, destilamos os sinais vitais do ciclo educacional. O ano de 2026 marca o início matemático de um <strong>declínio projetado de 15 anos</strong> no número de novos universitários no hemisfério norte. 
-          </p>
-          <p>
-            Simultaneamente, o Brasil enfrenta um "penhasco induzido": as <strong>novas regras do MEC (Decreto nº 12.456)</strong> forçam uma reorganização drástica no ensino EAD. 
-            <span className="block mt-4 text-blue-600 font-medium bg-blue-50 px-4 py-2 rounded-xl inline-block text-sm md:text-base">
-              💡 Explore os cards clicando neles para revelar os insights e fontes.
-            </span>
-          </p>
-        </div>
-      </section>
+    <section class="max-w-4xl mx-auto px-6 mb-16 md:mb-24 text-lg md:text-xl text-[#1d1d1f] opacity-80 leading-relaxed font-light text-center">
+        <p class="mb-6">
+            A UNESCO trata o ensino superior como um setor em <strong>"ponto de inflexão"</strong>. O mundo atingiu 269 milhões de estudantes. A mobilidade explodiu. Mas o modelo "graduação única para a vida toda" morreu.
+        </p>
+        <span class="inline-flex items-center gap-2 mt-2 text-[#0071e3] font-medium bg-[#0071e3]/10 px-5 py-3 rounded-full text-sm md:text-base transition-transform hover:scale-105 cursor-default">
+            <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i> Interaja com os cards para revelar insights profundos e fontes.
+        </span>
+    </section>
 
-      { }
-      {/* Big Numbers Dashboard */}
-      <section className="px-4 md:px-6 max-w-7xl mx-auto mb-16 md:mb-24">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {bigNumbers.map((stat, idx) => (
-            <StatCard key={idx} stat={stat} />
-          ))}
+    <section class="px-6 max-w-[1400px] mx-auto mb-20 md:mb-32">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="numbers-container">
+            <!-- Injetado via JS -->
         </div>
-      </section>
+    </section>
 
-      {}
-      {/* Forças Motrizes */}
-      <section className="px-4 md:px-6 max-w-7xl mx-auto mb-16 md:mb-24">
-        <div className="mb-8 md:mb-12 max-w-3xl">
-          <h2 className="text-2xl md:text-4xl font-bold tracking-tight mb-3 md:mb-4">As forças que moldam o jogo.</h2>
-          <p className="text-lg md:text-xl text-[#86868b] font-light">
-            Sinais fortes e fracos que redefinem desde a matriz curricular até a sobrevivência financeira.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {forces.map((force, idx) => (
-            <ForceCard key={idx} force={force} />
-          ))}
-        </div>
-      </section>
-
-      {}
-      {/* Atores */}
-      <section className="bg-white py-16 md:py-24 mb-16 md:mb-24 border-y border-gray-100">
-        <div className="px-4 md:px-6 max-w-7xl mx-auto">
-          <div className="mb-10 md:mb-16 max-w-2xl">
-            <h2 className="text-2xl md:text-4xl font-bold tracking-tight mb-3 md:mb-4">Quem edita as novas regras.</h2>
-            <p className="text-lg md:text-xl text-[#86868b] font-light mb-4">
-              Governos atuam como reguladores, corporações como educadores paralelos.
+    <section class="px-6 max-w-[1400px] mx-auto mb-20 md:mb-32">
+        <div class="mb-10 md:mb-16 max-w-3xl">
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-[#1d1d1f]">Forças que moldam 2035.</h2>
+            <p class="text-xl md:text-2xl text-[#86868b] font-light tracking-tight">
+                Sinais fortes e fracos que redefinem desde a matriz curricular até a sobrevivência financeira.
             </p>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
-            {actors.map((actor, idx) => (
-              <ActorCard key={idx} actor={actor} />
-            ))}
-          </div>
         </div>
-      </section>
-
-      {}
-      {/* O Recorte Brasil */}
-      <section className="px-4 md:px-6 max-w-7xl mx-auto mb-16 md:mb-24">
-        <div className="border-l-4 border-[#1d1d1f] pl-4 md:pl-8 mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-3 md:mb-4">O Paradoxo Brasileiro</h2>
-          <p className="text-lg md:text-xl text-[#86868b] font-light max-w-3xl">
-            O Brasil não sofre do penhasco demográfico por falta de jovens, mas por um déficit de conversão somado à retração do financiamento (FIES/Prouni).
-          </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" id="forces-container">
+            <!-- Injetado via JS -->
         </div>
+    </section>
 
-        <div className="w-full">
-          <div className="bg-white p-6 md:p-12 rounded-3xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] relative overflow-hidden border border-red-50">
-            <div className="absolute top-0 right-0 bg-red-500 text-white text-[10px] md:text-xs font-bold px-3 py-1 md:px-4 md:py-1 rounded-bl-xl">ALERTA REGULATÓRIO</div>
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6 md:mb-8 border-b border-gray-100 pb-6 md:pb-8">
-              <div className="p-3 md:p-4 bg-red-50 rounded-2xl shrink-0">
-                <AlertTriangle className="w-8 h-8 md:w-10 md:h-10 text-red-500" />
-              </div>
-              <div>
-                <h3 className="text-2xl md:text-3xl font-bold text-[#1d1d1f] leading-tight">O Marco do EAD</h3>
-                <p className="text-sm md:text-lg text-[#86868b] mt-1 md:mt-2">O Decreto MEC nº 12.456 cria um "penhasco induzido".</p>
-              </div>
+    <section class="bg-white py-20 md:py-32 mb-20 md:mb-32 border-y border-gray-200/50">
+        <div class="px-6 max-w-[1400px] mx-auto">
+            <div class="mb-12 md:mb-20 max-w-2xl">
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-[#1d1d1f]">A Coalizão de Poder.</h2>
+                <p class="text-xl md:text-2xl text-[#86868b] font-light tracking-tight">
+                    O controle migrou. Quem define o que é competência hoje são os governos reguladores e as corporações.
+                </p>
             </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8" id="actors-container">
+               <!-- Injetado via JS -->
+            </div>
+        </div>
+    </section>
+
+    <section class="px-6 max-w-[1400px] mx-auto mb-20 md:mb-32">
+        <div class="mb-10 md:mb-16 max-w-3xl">
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-[#1d1d1f]">Geopolítica do Talento.</h2>
+            <p class="text-xl md:text-2xl text-[#86868b] font-light tracking-tight">
+                País que atrai estudante atrai cérebro, patente e investimento. O mapa da excelência está mudando.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8" id="nations-container">
+            <!-- Injetado via JS -->
+        </div>
+    </section>
+
+    <section class="bg-black text-white py-20 md:py-32 mb-20 md:mb-32 relative overflow-hidden">
+        <!-- Efeitos de iluminação difusa ao fundo -->
+        <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-[#0071e3] opacity-20 blur-[120px] rounded-full pointer-events-none"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-[#34c759] opacity-10 blur-[150px] rounded-full pointer-events-none"></div>
+        
+        <div class="px-6 max-w-[1400px] mx-auto relative z-10">
+            <div class="mb-16 md:mb-24 max-w-3xl">
+                <h2 class="text-4xl md:text-6xl font-bold tracking-tighter mb-6 text-white leading-tight">A Nova Demanda Curricular.</h2>
+                <p class="text-xl md:text-2xl text-[#a1a1a6] font-light tracking-tight">
+                    O curso parado por cinco anos já nasce morto. As carreiras do futuro misturam tecnologia profunda, negócio, ética e impacto.
+                </p>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-sm font-semibold mb-8 text-[#86868b] uppercase tracking-[0.2em] border-b border-[#333336] pb-4">Carreiras Híbridas em Alta</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="careers-container">
+                    <!-- Injetado via JS -->
+                </div>
+            </div>
+
+            <div class="pt-12">
+                <h3 class="text-sm font-semibold mb-8 text-[#34c759] uppercase tracking-[0.2em] border-b border-[#333336] pb-4">A Virada das Engenharias</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="engineerings-container">
+                    <!-- Injetado via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="px-6 max-w-[1400px] mx-auto mb-20 md:mb-32">
+        <div class="max-w-4xl mx-auto text-center mb-16 md:mb-20">
+            <h2 class="text-4xl md:text-6xl font-bold tracking-tighter mb-6 text-[#1d1d1f]">O Paradoxo Brasileiro.</h2>
+            <p class="text-xl md:text-2xl text-[#86868b] font-light tracking-tight leading-relaxed">
+                O ensino superior vale muito (premium de 148% na renda), mas apenas 24% concluem. O colapso do Brasil não é falta de jovens, é o choque entre baixa conversão, evasão brutal e um novo marco regulatório do MEC.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Coluna de Impactos e Alertas -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Alerta EAD -->
+                <div class="bg-white p-8 md:p-10 rounded-[2rem] apple-shadow cursor-pointer transition-all duration-500 hover:apple-shadow-hover hover:-translate-y-1 group relative overflow-hidden" onclick="toggleContent(this, '#ff3b30')">
+                    <div class="absolute top-0 right-0 bg-[#ff3b30] text-white text-[10px] font-bold px-4 py-1 rounded-bl-2xl uppercase tracking-wider">Alerta Regulatório</div>
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex gap-5 items-start">
+                            <div class="p-4 bg-[#ff3b30]/10 rounded-2xl shrink-0 group-hover:scale-105 transition-transform duration-500">
+                                <i data-lucide="alert-triangle" class="w-8 h-8 text-[#ff3b30]"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl md:text-3xl font-bold text-[#1d1d1f] tracking-tight mb-1">O Novo Marco do EAD</h3>
+                                <p class="text-[#86868b] text-sm md:text-base">Decreto 12.456 (2025): O fim do crescimento puramente quantitativo.</p>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-down" class="toggle-icon w-6 h-6 text-gray-400 transition-transform duration-500 shrink-0 mt-2"></i>
+                    </div>
+                    <div class="expand-content grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out">
+                        <div class="overflow-hidden">
+                            <div class="pt-6 mt-6 border-t border-gray-100">
+                                <p class="text-sm md:text-base text-[#1d1d1f] leading-relaxed opacity-90 mb-4">
+                                    <strong>A Regra:</strong> Criação da modalidade semipresencial. Limita EAD a no mínimo 20% de presencialidade. Bloqueia licenciaturas e cursos de saúde 100% online. As IES têm até maio de 2027 para readequação total.
+                                </p>
+                                <p class="text-sm md:text-base text-[#1d1d1f] leading-relaxed opacity-90 mb-4">
+                                    <strong>A Colisão de Tendências:</strong> O Brasil possui 23,6 milhões de vagas ofertadas, mas só 10,2 milhões preenchidas. O EAD representava 50,7% do total. Ao exigir infraestrutura física (laboratórios, coordenação) em cada polo, a projeção é o fechamento de até 25.000 polos, criando um "penhasco demográfico induzido por política pública".
+                                </p>
+                                <p class="text-[10px] font-semibold text-[#86868b] uppercase tracking-wider">FONTE: MEC / MONITOR MERCANTIL / INEP</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Painel Indústria -->
+                <div class="bg-white p-8 md:p-10 rounded-[2rem] apple-shadow cursor-pointer transition-all duration-500 hover:apple-shadow-hover hover:-translate-y-1 group relative overflow-hidden" onclick="toggleContent(this, '#0071e3')">
+                    <div class="absolute top-0 right-0 bg-[#0071e3] text-white text-[10px] font-bold px-4 py-1 rounded-bl-2xl uppercase tracking-wider">Demanda Corporativa</div>
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex gap-5 items-start">
+                            <div class="p-4 bg-[#0071e3]/10 rounded-2xl shrink-0 group-hover:scale-105 transition-transform duration-500">
+                                <i data-lucide="factory" class="w-8 h-8 text-[#0071e3]"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl md:text-3xl font-bold text-[#1d1d1f] tracking-tight mb-1">O Déficit STEM e a Indústria</h3>
+                                <p class="text-[#86868b] text-sm md:text-base">14 milhões de pessoas a qualificar até 2027.</p>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-down" class="toggle-icon w-6 h-6 text-gray-400 transition-transform duration-500 shrink-0 mt-2"></i>
+                    </div>
+                    <div class="expand-content grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out">
+                        <div class="overflow-hidden">
+                            <div class="pt-6 mt-6 border-t border-gray-100">
+                                <p class="text-sm md:text-base text-[#1d1d1f] leading-relaxed opacity-90 mb-4">
+                                    <strong>O Gargalo:</strong> Apenas 16% dos graduados no Brasil estão em STEM (Ciência, Tecnologia, Engenharia e Matemática), contra 23% na OCDE.
+                                </p>
+                                <p class="text-sm md:text-base text-[#1d1d1f] leading-relaxed opacity-90 mb-4">
+                                    <strong>A Oportunidade:</strong> A indústria nacional clama por perfis altamente específicos: técnicos em cibersegurança industrial, especialistas em gêmeos digitais e arquitetos de IA industrial. Existe uma avenida gigantesca para instituições como o SENAI liderarem essa formação aplicada.
+                                </p>
+                                <p class="text-[10px] font-semibold text-[#86868b] uppercase tracking-wider">FONTE: CNI / OCDE</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Playbook (Apostas) -->
+            <div class="bg-white p-8 md:p-10 rounded-[2rem] border border-gray-200/60 apple-shadow">
+                <h3 class="text-xl font-bold mb-8 flex items-center gap-3 text-[#1d1d1f] tracking-tight"><i data-lucide="target" class="w-6 h-6 text-[#0071e3]"></i> Playbook Brasil</h3>
+                <ul class="space-y-6">
+                    <li class="flex gap-4 items-start">
+                        <div class="bg-[#f5f5f7] p-2 rounded-full shrink-0"><i data-lucide="arrow-right" class="w-4 h-4 text-[#0071e3]"></i></div>
+                        <div>
+                            <strong class="text-base text-[#1d1d1f] block mb-1">Ponte Técnico-Superior</strong>
+                            <span class="text-sm text-[#86868b] leading-relaxed block">Trilha contínua (estilo SENAI): Técnico → Certificações → Tecnólogo → Engenharia.</span>
+                        </div>
+                    </li>
+                    <li class="flex gap-4 items-start">
+                        <div class="bg-[#f5f5f7] p-2 rounded-full shrink-0"><i data-lucide="arrow-right" class="w-4 h-4 text-[#0071e3]"></i></div>
+                        <div>
+                            <strong class="text-base text-[#1d1d1f] block mb-1">Evasão do 1º Ano</strong>
+                            <span class="text-sm text-[#86868b] leading-relaxed block">Parar de tratar permanência como "setor de apoio". Nivelamento com IA e projetos práticos reais imediatos.</span>
+                        </div>
+                    </li>
+                    <li class="flex gap-4 items-start">
+                        <div class="bg-[#f5f5f7] p-2 rounded-full shrink-0"><i data-lucide="arrow-right" class="w-4 h-4 text-[#0071e3]"></i></div>
+                        <div>
+                            <strong class="text-base text-[#1d1d1f] block mb-1">Ensino Superior Aplicado</strong>
+                            <span class="text-sm text-[#86868b] leading-relaxed block">Virar referência em ensino industrial, tecnológico, cibersegurança e bioeconomia tropical.</span>
+                        </div>
+                    </li>
+                    <li class="flex gap-4 items-start">
+                        <div class="bg-[#f5f5f7] p-2 rounded-full shrink-0"><i data-lucide="arrow-right" class="w-4 h-4 text-[#0071e3]"></i></div>
+                        <div>
+                            <strong class="text-base text-[#1d1d1f] block mb-1">Política Institucional de IA</strong>
+                            <span class="text-sm text-[#86868b] leading-relaxed block">Implementar "IA desde a base" (como o modelo do Piauí). O currículo sem IA já nasce obsoleto.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white py-20 md:py-32 mb-10 border-t border-gray-200/50">
+        <div class="px-6 max-w-[1400px] mx-auto">
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-10 md:mb-16 text-center text-[#1d1d1f]">Cenários Possíveis para 2035</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8" id="scenarios-container">
+                <!-- Injetado via JS -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="px-6 max-w-5xl mx-auto pt-10 pb-16 text-center">
+        <h4 class="text-xs font-semibold text-[#86868b] uppercase tracking-[0.2em] mb-6">Referências de Inteligência</h4>
+        <div class="flex flex-wrap justify-center gap-3 text-xs text-[#1d1d1f] opacity-80">
+            <span class="bg-[#f5f5f7] px-4 py-2 rounded-full border border-gray-200/50">UNESCO 2026</span>
+            <span class="bg-[#f5f5f7] px-4 py-2 rounded-full border border-gray-200/50">Fórum Econômico Mundial</span>
+            <span class="bg-[#f5f5f7] px-4 py-2 rounded-full border border-gray-200/50">EDUCAUSE Horizon</span>
+            <span class="bg-[#f5f5f7] px-4 py-2 rounded-full border border-gray-200/50">OCDE</span>
+            <span class="bg-[#f5f5f7] px-4 py-2 rounded-full border border-gray-200/50">CNI / ONI</span>
+            <span class="bg-[#f5f5f7] px-4 py-2 rounded-full border border-gray-200/50">MEC / INEP</span>
+            <span class="bg-[#f5f5f7] px-4 py-2 rounded-full border border-gray-200/50">UE AI Act</span>
+        </div>
+        <p class="mt-10 text-xs text-[#86868b] font-light">Design de Futuros • Síntese Estratégica 2026-2035</p>
+    </footer>
+
+    <script>
+        // Base de Dados
+        const bigNumbers = [
+            { value: "269M", label: "Estudantes Globais", sub: "Massificação com acesso desigual (80% Europa vs 9% África).", insight: "A educação superior virou geopolítica de talento. O Brasil atingiu 10 milhões, mas com ocupação ociosa.", source: "UNESCO Report 2026 / INEP" },
+            { value: "22%", label: "Empregos Transformados", sub: "Saldo de +78 milhões de vagas até 2030 (IA, energia, dados).", insight: "A lacuna de competências é a barreira para 63% dos empregadores. Currículo parado por 5 anos nasce velho.", source: "Fórum Econômico Mundial" },
+            { value: "148%", label: "Premium Salarial (BR)", sub: "Ganho superior sobre o ensino médio (média da OCDE: 54%).", insight: "O diploma vale muito no Brasil, mas 25% evadem no 1º ano. O foco institucional muda de 'acesso' para 'permanência'.", source: "OCDE - Education at a Glance" },
+            { value: "50,7%", label: "Matrículas EAD (BR)", sub: "Modalidade EAD ultrapassou o presencial pela primeira vez.", insight: "Com o novo Decreto 12.456, a válvula de escape barata do EAD sofre corte drástico por exigência física.", source: "INEP / MEC" }
+        ];
+
+        const forces = [
+            { icon: "cpu", title: "IA como Infraestrutura", desc: "A IA entra em quatro camadas vitais: ensino, gestão, pesquisa e governança. Já não é um 'teste de departamento'.", insight: "Em 2025, apenas 20% das IES tinham políticas de IA. Instituições agora correm para provar governança algorítmica.", source: "UNESCO / EDUCAUSE" },
+            { icon: "layers", title: "O Fim da Graduação Única", desc: "Formação empilhável: microcredenciais, trilhas por competência e reentrada constante. A UE já padronizou esse modelo.", insight: "O futuro não é 'faculdade OU curso livre'. É ecossistema modular onde o trabalhador retorna ciclicamente.", source: "União Europeia" },
+            { icon: "leaf", title: "Green Skills no Núcleo", desc: "A transição verde sai da 'optativa' e entra na engenharia dura, cadeia de suprimentos e produto.", insight: "Toda carreira técnica será climática. O crescimento ocorre em energias renováveis, baterias e eficiência.", source: "WEF" },
+            { icon: "check-circle", title: "Avaliação por Evidência", desc: "A pergunta muda de 'qual matéria cursou?' para 'o que sabe resolver?'. Transcripts por competência avançam.", insight: "Com IAs fazendo provas tradicionais em segundos, a avaliação migra para defesa oral, simulações e portfólios.", source: "EDUCAUSE" },
+            { icon: "briefcase", title: "Plataforma de Trabalho", desc: "Empresas cocriam currículo e propõem desafios reais. A fronteira entre estudar e trabalhar desaparece.", insight: "A empregabilidade torna-se a métrica mestra de confiança institucional, superando rankings estéticos.", source: "Análise CNI / Mercado" },
+            { icon: "globe-2", title: "Internacionalização Sul-Sul", desc: "Mobilidade exportada pelo Sul Global (Índia/África) via digital de baixo custo e hubs emergentes.", insight: "O eixo EUA-Europa perde monopólio. O Brasil pode atrair LATAM e África Lusófona com soluções bioeconômicas.", source: "Global Policy Journal" }
+        ];
+
+        const actors = [
+            { name: "Estados & Reguladores", role: "Soberania", action: "EUA restringem verbas (NSF/NIH) por política. UE impõe o AI Act. China centraliza currículo de tecnologia.", insight: "O Estado voltou. A educação superior é tratada como infraestrutura de segurança nacional e soberania em IA.", icon: "landmark", source: "Higher Ed Dive / UE" },
+            { name: "Big Techs", role: "Infraestrutura", action: "Microsoft, NVIDIA e AWS controlam a nuvem, os modelos fundacionais de IA e as certificações demandadas.", insight: "Elas não substituem a universidade, mas definem o que é competência no mercado e formam para 'day-one-ready roles'.", icon: "server", source: "Research.com" },
+            { name: "Plataformas Skills", role: "Descentralização", action: "Coursera, edX e LinkedIn Learning escalam o modelo de habilidades demonstráveis e portfólios.", insight: "Provam que a escala digital vence o campus tradicional no reskilling corporativo imediato.", icon: "layout-grid", source: "Análise EdTech" },
+            { name: "Empregadores & Indústria", role: "Demandantes", action: "Exigem competências imediatas. No Brasil, a CNI projeta necessidade de requalificar 14 milhões de pessoas.", insight: "Instituições que não abrirem seus laboratórios e currículos para as cadeias produtivas formarão para o passado.", icon: "factory", source: "CNI / ONI" }
+        ];
+
+        const nations = [
+            { name: "EUA", focus: "Elite, pesquisa de IA e Venture Capital (MIT/Stanford).", insight: "Sofre com penhasco demográfico (menos jovens) e tensões ideológicas estatais, perdendo fatia do mercado de estudantes internacionais para o Reino Unido.", icon: "flag", source: "Tyton Partners / QS" },
+            { name: "China", focus: "Escala massiva em STEM e infraestrutura estatal.", insight: "Exporta ecossistema. Superou EUA em artigos top 1% de IA e usa o programa 'Double First-Class' para liderança acadêmica global até 2050.", icon: "trending-up", source: "Global Policy Journal" },
+            { name: "Cingapura", focus: "Hub asiático integrando perfeitamente Estado e pesquisa (NUS).", insight: "Blindou-se do declínio demográfico ao focar em desafios urbanos práticos e atração super-seletiva de talentos de ponta.", icon: "building", source: "UNESCO" },
+            { name: "Europa (ALE/SUI)", focus: "Indústria 4.0, ensino dual e regulação verde (ETH Zurich).", insight: "A força europeia baseia-se em engenharia aplicada e no AI Act, ditando regras globais de governança ética e ESG.", icon: "cog", source: "União Europeia" }
+        ];
+
+        const careers = [
+            { title: "Design Comportamental & DTx", desc: "Terapêuticas digitais reguladas para condições crônicas.", insight: "O engajamento no aplicativo não é métrica de UX, é a própria dosagem clínica exigida para eficácia médica. Crescimento de 28% a.a.", source: "Digital Therapeutics Alliance" },
+            { title: "Governança e Auditoria de IA", desc: "Garantia de ética, segurança de dados e compliance algorítmico.", insight: "A UE exige auditoria. Multas pesadas por viés de IA criam perfil raríssimo: híbrido entre Direito, Ética e Ciência de Dados.", source: "UE AI Act" },
+            { title: "Arquiteto de Microcredenciais", desc: "Curadoria de trilhas modulares de aprendizagem contínua.", insight: "O profissional que quebra cursos engessados de 4 anos em sprints de certificações alinhadas ao mercado de trabalho em tempo real.", source: "EDUCAUSE" }
+        ];
+
+        const engineerings = [
+            { title: "IA & Dados Industriais", desc: "O 'mestre de obras' que implementa o modelo estatístico.", insight: "IA transversal. Civil, Mecânica e Elétrica ganham IA embarcada. Prevê falhas mecânicas via IIoT antes que ocorram.", source: "CNI" },
+            { title: "Cibersegurança Industrial", desc: "Segurança de IIoT, infraestruturas e robótica.", insight: "Um ataque na indústria não apenas rouba dados, trava linhas de produção e põe operadores em risco físico.", source: "Fórum Econômico Mundial" },
+            { title: "Gêmeos Digitais", desc: "Simulação virtual antes da construção física.", insight: "O engenheiro otimiza fluxos e testa estresse de materiais no ambiente digital, economizando milhões e acelerando o ESG.", source: "Observatório Nacional Indústria" },
+            { title: "Energias Inteligentes", desc: "Hidrogênio verde, microrredes e armazenamento.", insight: "Pilar da transição climática. Demanda global explosiva por especialistas em gestão de baterias e eficiência.", source: "WEF / SENAI" }
+        ];
+
+        const scenarios = [
+            { title: "A. Universidade Plataforma", desc: "Ecossistemas modulares de aprendizagem contínua com a indústria.", type: "success", color: "blue", insight: "O cenário vencedor. Atrai adultos (lifelong learning), atende a indústria e utiliza IA para prever sucesso e engajamento.", source: "Análise Foresight 2035" },
+            { title: "B. Industrial-Regenerativa", desc: "A aposta ideal para o Brasil: foco total em tecnologia tropical e agro.", type: "success", color: "green", insight: "Em vez de copiar Harvard, foca no território. Resolve dores reais de bioeconomia e energia, retendo talentos no estado.", source: "Cenários CNI/SESI" },
+            { title: "C. Universidade Commodity", desc: "Compete por preço, com EAD massivo de baixa qualidade e evasão.", type: "danger", color: "red", insight: "O risco iminente. Será asfixiada pela regulação mais dura do MEC e substituída por certificações baratas das Big Techs.", source: "Impacto Decreto MEC" },
+            { title: "D. Universidade Regulada", desc: "Alta qualidade burocrática, porém lenta demais para a inovação.", type: "warning", color: "orange", insight: "Garante segurança, mas a lentidão para aprovar novos currículos faz com que a indústria busque parceiros não-tradicionais.", source: "Políticas Públicas" }
+        ];
+
+        // Função Genérica de Renderização
+        function renderGrid(containerId, dataArray, cardGenerator) {
+            document.getElementById(containerId).innerHTML = dataArray.map(cardGenerator).join('');
+        }
+
+        // Renderizadores Específicos
+        renderGrid('numbers-container', bigNumbers, stat => `
+            <div class="bg-white p-8 rounded-[2rem] apple-shadow cursor-pointer transition-all duration-500 hover:apple-shadow-hover hover:-translate-y-1 group" onclick="toggleSimple(this, 'text-[#0071e3]')">
+                <p class="text-[#86868b] text-sm font-medium mb-3 flex justify-between items-center">${stat.label} <i data-lucide="plus" class="w-4 h-4 transition-transform duration-500"></i></p>
+                <h3 class="text-4xl md:text-5xl font-bold tracking-tighter text-[#1d1d1f] mb-3">${stat.value}</h3>
+                <p class="text-[13px] text-[#86868b] leading-relaxed">${stat.sub}</p>
+                <div class="expand-content grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out">
+                    <div class="overflow-hidden"><div class="pt-5 mt-5 border-t border-gray-100">
+                        <p class="text-sm text-[#1d1d1f] leading-relaxed opacity-90 mb-3">${stat.insight}</p>
+                        <p class="text-[10px] font-semibold text-[#86868b] uppercase tracking-[0.1em]">FONTE: ${stat.source}</p>
+                    </div></div>
+                </div>
+            </div>
+        `);
+
+        renderGrid('forces-container', forces, force => `
+            <div class="bg-white p-8 rounded-[2rem] apple-shadow cursor-pointer transition-all duration-500 hover:apple-shadow-hover hover:-translate-y-1 flex flex-col h-full group" onclick="toggleSimple(this, 'text-[#0071e3]')">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="bg-[#f5f5f7] w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-[#0071e3]/10 transition-colors duration-500">
+                        <i data-lucide="${force.icon}" class="w-6 h-6 text-[#1d1d1f] group-hover:text-[#0071e3] transition-colors duration-500"></i>
+                    </div>
+                    <i data-lucide="plus" class="w-5 h-5 text-gray-300 transition-transform duration-500"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 tracking-tight text-[#1d1d1f]">${force.title}</h3>
+                <p class="text-[#86868b] text-[15px] leading-relaxed flex-grow">${force.desc}</p>
+                <div class="expand-content grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out">
+                    <div class="overflow-hidden"><div class="pt-5 mt-5 border-t border-gray-100">
+                        <p class="text-sm text-[#1d1d1f] leading-relaxed opacity-90 mb-3">${force.insight}</p>
+                        <p class="text-[10px] font-semibold text-[#86868b] uppercase tracking-[0.1em]">FONTE: ${force.source}</p>
+                    </div></div>
+                </div>
+            </div>
+        `);
+
+        renderGrid('actors-container', actors, actor => `
+            <div class="bg-white p-8 rounded-[2rem] apple-shadow cursor-pointer transition-all duration-500 hover:apple-shadow-hover group border border-transparent" onclick="toggleActor(this)">
+                <div class="flex gap-6 items-start">
+                    <div class="icon-bg bg-[#f5f5f7] p-4 rounded-2xl shrink-0 transition-colors duration-500">
+                        <i data-lucide="${actor.icon}" class="main-icon w-6 h-6 text-[#1d1d1f] transition-colors duration-500"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-bold flex flex-wrap items-center gap-3 mb-2 tracking-tight text-title transition-colors duration-500">
+                            ${actor.name} 
+                            <span class="role-badge text-[11px] font-medium text-[#0071e3] bg-[#0071e3]/10 px-3 py-1 rounded-full transition-colors duration-500">${actor.role}</span>
+                        </h3>
+                        <p class="desc-text text-[15px] text-[#86868b] leading-relaxed transition-colors duration-500">${actor.action}</p>
+                    </div>
+                    <i data-lucide="chevron-down" class="toggle-icon w-5 h-5 text-gray-300 mt-1 shrink-0 transition-transform duration-500"></i>
+                </div>
+                <div class="expand-content grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out">
+                    <div class="overflow-hidden"><div class="pt-6 mt-6 border-t border-gray-700/50">
+                        <p class="text-[15px] text-gray-200 leading-relaxed font-light mb-4">${actor.insight}</p>
+                        <p class="text-[10px] font-semibold text-gray-500 uppercase tracking-[0.1em]">FONTE: ${actor.source}</p>
+                    </div></div>
+                </div>
+            </div>
+        `);
+
+        renderGrid('nations-container', nations, n => `
+            <div class="bg-white p-8 rounded-[2rem] apple-shadow cursor-pointer transition-all duration-500 hover:apple-shadow-hover hover:-translate-y-1 flex flex-col h-full group" onclick="toggleSimple(this, 'text-[#0071e3]')">
+                <h3 class="text-lg font-bold mb-3 flex justify-between items-center tracking-tight text-[#1d1d1f]">
+                    <span class="flex items-center gap-2"><i data-lucide="${n.icon}" class="w-5 h-5 text-[#86868b] group-hover:text-[#0071e3] transition-colors duration-500"></i> ${n.name}</span>
+                    <i data-lucide="plus" class="w-4 h-4 text-gray-300 transition-transform duration-500"></i>
+                </h3>
+                <p class="text-[14px] text-[#86868b] leading-relaxed">${n.focus}</p>
+                <div class="expand-content grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out">
+                    <div class="overflow-hidden"><div class="pt-4 mt-4 border-t border-gray-100">
+                        <p class="text-[13px] text-[#1d1d1f] leading-relaxed opacity-90 mb-3">${n.insight}</p>
+                        <p class="text-[9px] font-semibold text-[#86868b] uppercase tracking-[0.1em]">FONTE: ${n.source}</p>
+                    </div></div>
+                </div>
+            </div>
+        `);
+
+        renderGrid('careers-container', careers, c => `
+            <div class="bg-[#1c1c1e] border border-[#333336] p-8 rounded-[2rem] cursor-pointer transition-all duration-500 hover:border-[#0071e3]/50 hover:bg-[#2c2c2e] group" onclick="toggleSimple(this, 'text-[#0071e3]')">
+                <h4 class="font-bold text-white mb-3 text-[17px] tracking-tight flex justify-between items-start">${c.title} <i data-lucide="plus" class="w-4 h-4 text-gray-500 transition-transform duration-500"></i></h4>
+                <p class="text-[14px] text-[#a1a1a6] leading-relaxed">${c.desc}</p>
+                <div class="expand-content grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out">
+                    <div class="overflow-hidden"><div class="pt-4 mt-4 border-t border-[#333336]">
+                        <p class="text-[13px] text-gray-300 leading-relaxed font-light mb-3">${c.insight}</p>
+                        <p class="text-[9px] font-semibold text-gray-500 uppercase tracking-[0.1em]">FONTE: ${c.source}</p>
+                    </div></div>
+                </div>
+            </div>
+        `);
+
+        renderGrid('engineerings-container', engineerings, e => `
+            <div class="bg-[#1c1c1e] border border-[#333336] p-6 rounded-[2rem] cursor-pointer transition-all duration-500 hover:border-[#34c759]/50 hover:bg-[#2c2c2e] group flex flex-col h-full" onclick="toggleSimple(this, 'text-[#34c759]')">
+                <h4 class="font-bold text-[#34c759] mb-3 text-[15px] tracking-tight flex justify-between items-start">${e.title} <i data-lucide="plus" class="w-4 h-4 text-gray-500 transition-transform duration-500"></i></h4>
+                <p class="text-[13px] text-[#a1a1a6] leading-relaxed flex-grow">${e.desc}</p>
+                <div class="expand-content grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out">
+                    <div class="overflow-hidden"><div class="pt-4 mt-4 border-t border-[#333336]">
+                        <p class="text-[12px] text-gray-300 leading-relaxed font-light mb-3">${e.insight}</p>
+                        <p class="text-[9px] font-semibold text-gray-500 uppercase tracking-[0.1em]">FONTE: ${e.source}</p>
+                    </div></div>
+                </div>
+            </div>
+        `);
+
+        renderGrid('scenarios-container', scenarios, s => `
+            <div class="bg-white border-t-4 border-${s.color}-500 p-8 rounded-[2rem] apple-shadow cursor-pointer transition-all duration-500 hover:apple-shadow-hover hover:-translate-y-1 group" onclick="toggleSimple(this, 'text-${s.color}-600')">
+                <h3 class="font-bold text-xl mb-3 text-[#1d1d1f] tracking-tight flex justify-between items-center">${s.title} <i data-lucide="plus" class="w-5 h-5 text-gray-300 transition-transform duration-500"></i></h3>
+                <p class="text-[15px] text-[#86868b] leading-relaxed mb-4">${s.desc}</p>
+                <div class="expand-content grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out">
+                    <div class="overflow-hidden"><div class="pt-5 border-t border-gray-100">
+                        <p class="text-[14px] text-[#1d1d1f] leading-relaxed opacity-90 mb-3"><strong>Projeção:</strong> ${s.insight}</p>
+                        <p class="text-[10px] font-semibold text-[#86868b] uppercase tracking-[0.1em]">FONTE: ${s.source}</p>
+                    </div></div>
+                </div>
+            </div>
+        `);
+
+        lucide.createIcons();
+
+        // Funções de Interatividade
+        function toggleSimple(el, accentColorClass = '') {
+            const content = el.querySelector('.expand-content');
+            const icon = el.querySelector('[data-lucide="plus"]') || el.querySelector('[data-lucide="chevron-down"]');
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-              <div className="space-y-2 md:space-y-3">
-                <h4 className="font-bold text-gray-900 flex items-center gap-2 text-sm md:text-base"><ArrowRight className="w-4 h-4 text-red-500 shrink-0"/> Fim do "Crescimento Fácil"</h4>
-                <p className="text-gray-600 text-xs md:text-sm leading-relaxed">Novas regras travam licenciaturas 100% online. Cursos da área da saúde agora ficam restritos à modalidade presencial.</p>
-              </div>
-              <div className="space-y-2 md:space-y-3">
-                <h4 className="font-bold text-gray-900 flex items-center gap-2 text-sm md:text-base"><ArrowRight className="w-4 h-4 text-red-500 shrink-0"/> Extinção de Polos</h4>
-                <p className="text-gray-600 text-xs md:text-sm leading-relaxed">Projeta-se o fechamento de até 25.000 polos no interior pela exigência de infraestrutura física dedicada, prejudicando a capilaridade.</p>
-              </div>
-              <div className="space-y-2 md:space-y-3">
-                <h4 className="font-bold text-gray-900 flex items-center gap-2 text-sm md:text-base"><ArrowRight className="w-4 h-4 text-red-500 shrink-0"/> Complexidade Jurídica</h4>
-                <p className="text-gray-600 text-xs md:text-sm leading-relaxed">O planejamento acadêmico exige modelos complexos para garantir que alunos nas regras antigas e novas coexistam até maio de 2027.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            if (content.classList.contains('grid-rows-[0fr]')) {
+                content.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+                content.classList.replace('opacity-0', 'opacity-100');
+                if (icon) {
+                    icon.classList.add('rotate-45');
+                    if(accentColorClass) icon.className += ` ${accentColorClass}`;
+                }
+            } else {
+                content.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+                content.classList.replace('opacity-100', 'opacity-0');
+                if (icon) {
+                    icon.classList.remove('rotate-45');
+                    if(accentColorClass) {
+                        const classes = accentColorClass.split(' ');
+                        classes.forEach(c => icon.classList.remove(c));
+                    }
+                }
+            }
+        }
 
-      {}
-      {/* Carreiras do Futuro */}
-      <section className="px-4 md:px-6 max-w-7xl mx-auto mb-16 md:mb-24">
-        <h2 className="text-2xl md:text-4xl font-bold tracking-tight mb-6 md:mb-8 text-center">A Nova Demanda Curricular</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {careers.map((career, idx) => (
-            <CareerCard key={idx} career={career} />
-          ))}
-        </div>
-      </section>
+        function toggleActor(el) {
+            const content = el.querySelector('.expand-content');
+            const iconBg = el.querySelector('.icon-bg');
+            const mainIcon = el.querySelector('.main-icon');
+            const badge = el.querySelector('.role-badge');
+            const descText = el.querySelector('.desc-text');
+            const titleText = el.querySelector('.text-title');
+            const toggleIcon = el.querySelector('.toggle-icon');
 
-      {/* Footer / Fontes */}
-      <footer className="px-4 md:px-6 max-w-7xl mx-auto border-t border-gray-200 pt-10 md:pt-12 pb-6 md:pb-8 text-center">
-        <h4 className="text-xs md:text-sm font-semibold text-[#1d1d1f] uppercase tracking-wider mb-4 md:mb-6">Metodologia e Fontes de Foresight</h4>
-        <div className="flex flex-wrap justify-center gap-2 text-[10px] md:text-xs text-[#86868b] max-w-4xl mx-auto">
-          {["Decreto MEC 12.456/2025", "Tyton Partners", "QS Quacquarelli Symonds", "Global Policy Journal", "Moody's Ratings", "Research.com", "Digital Therapeutics Alliance", "MEC", "INEP"].map((fonte, i) => (
-            <span key={i} className="bg-gray-200/50 px-2 py-1 md:px-3 md:py-1.5 rounded-full hover:bg-gray-200 transition-colors cursor-default border border-gray-100">{fonte}</span>
-          ))}
-        </div>
-        <p className="mt-6 md:mt-8 text-[10px] md:text-xs text-gray-400">Design de Futuros • Elaborado via síntese de dados macro-ambientais (Cenário 2026).</p>
-      </footer>
-    </div>
-  );
-}
+            if (content.classList.contains('grid-rows-[0fr]')) {
+                content.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+                content.classList.replace('opacity-0', 'opacity-100');
+                
+                // Dark Mode estético ao expandir
+                el.classList.add('bg-[#111111]', 'border-[#333336]', 'shadow-2xl', 'scale-[1.02]', 'z-10', 'relative');
+                el.classList.remove('bg-white', 'hover:apple-shadow-hover', 'border-transparent');
+                
+                iconBg.classList.replace('bg-[#f5f5f7]', 'bg-[#1c1c1e]');
+                mainIcon.classList.replace('text-[#1d1d1f]', 'text-white');
+                titleText.classList.replace('text-[#1d1d1f]', 'text-white');
+                
+                badge.classList.add('bg-[#0071e3]/20', 'text-[#4dabf7]');
+                badge.classList.remove('bg-[#0071e3]/10', 'text-[#0071e3]');
+                
+                descText.classList.replace('text-[#86868b]', 'text-[#a1a1a6]');
+                toggleIcon.classList.replace('text-gray-300', 'text-white');
+                toggleIcon.classList.add('rotate-180');
+            } else {
+                content.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+                content.classList.replace('opacity-100', 'opacity-0');
+                
+                // Retorna ao Light Mode
+                el.classList.remove('bg-[#111111]', 'border-[#333336]', 'shadow-2xl', 'scale-[1.02]', 'z-10', 'relative');
+                el.classList.add('bg-white', 'hover:apple-shadow-hover', 'border-transparent');
+                
+                iconBg.classList.replace('bg-[#1c1c1e]', 'bg-[#f5f5f7]');
+                mainIcon.classList.replace('text-white', 'text-[#1d1d1f]');
+                titleText.classList.replace('text-white', 'text-[#1d1d1f]');
+                
+                badge.classList.remove('bg-[#0071e3]/20', 'text-[#4dabf7]');
+                badge.classList.add('bg-[#0071e3]/10', 'text-[#0071e3]');
+                
+                descText.classList.replace('text-[#a1a1a6]', 'text-[#86868b]');
+                toggleIcon.classList.replace('text-white', 'text-gray-300');
+                toggleIcon.classList.remove('rotate-180');
+            }
+        }
+
+        function toggleContent(el, colorHex) {
+            const content = el.querySelector('.expand-content');
+            const icon = el.querySelector('.toggle-icon');
+            
+            if (content.classList.contains('grid-rows-[0fr]')) {
+                content.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+                content.classList.replace('opacity-0', 'opacity-100');
+                icon.classList.add('rotate-180');
+                el.style.borderColor = colorHex + '40'; // Adiciona 40 (hex) para opacidade
+                el.style.borderWidth = '1px';
+            } else {
+                content.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+                content.classList.replace('opacity-100', 'opacity-0');
+                icon.classList.remove('rotate-180');
+                el.style.borderColor = 'transparent';
+            }
+        }
+    </script>
+</body>
+</html>
